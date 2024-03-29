@@ -4,6 +4,11 @@
 
 #include "Board.h"
 
+Board::Board()  {
+//    // Initialize a pointer array of chess pieces. Each index corresends to a number on the gameboard.
+//    boardKey =
+}
+
 
 /**
  *
@@ -11,11 +16,11 @@
  * @param y - the y coordinate of the chess piece
  * @return - 0 when no piece is found. A chess piece when a piece is found.
  */
-ChessPiece Board::getPieceatPos(int x, int y)
+ChessPiece* Board::getPieceatPos(int x, int y)
 {
     if( (x >= 0 && x < size[0]) && (y >= 0 && y < size[1])) // in bounds check
         return boardKey[ gameboard[y][x] ];
     else
-        return 0;
+        return nullptr;
 };
 

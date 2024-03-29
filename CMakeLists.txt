@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(sfmlcmaketst)
+project(Prog_II_Chess)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -15,7 +15,7 @@ find_package(SFML COMPONENTS system window graphics)
 
 add_executable(${PROJECT_NAME}
         main.cpp
-        Board/Board.cpp Board/Board.h
+        Board/Board.h Board/Board.cpp
         ChessPiece/ChessPiece.h
         ChessPiece/Pawn/Pawn.cpp ChessPiece/Pawn/Pawn.h
         ChessPiece/King/King.cpp ChessPiece/King/King.h

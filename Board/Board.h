@@ -5,6 +5,7 @@
 #ifndef PROG_II_CHESS_BOARD_H
 #define PROG_II_CHESS_BOARD_H
 
+#include <algorithm>
 
 #include "../ChessPiece/Pawn/Pawn.h"
 #include "../ChessPiece/King/King.h"
@@ -18,29 +19,30 @@ class Board {
 private:
     int size[2] = {8,8};
     int gameboard[8][8] = {
-            {-2, -3, -4, -6, -5, -4, -3, -2},
-            {-1, -1, -1, -1, -1, -1, -1, -1,},
-            {0, 0, 0, 0, 0, 0, 0, 0,},
-            {0, 0, 0, 0, 0, 0, 0, 0,},
-            {0, 0, 0, 0, 0, 0, 0, 0,},
-            {0, 0, 0, 0, 0, 0, 0, 0,},
-            {2, 3, 4, 6, 5, 4, 3, 2,},
-            {1, 1, 1, 1, 1, 1, 1, 1,}
-        };
-    ChessPiece* boardKey[7] {
-        0,      // 0 | No piece
-        &Pawn,   // 1
-        &Rook,   // 2
-        &Knight, // 3
-        &Bishop, // 4
-        &King,   // 5
-        &Queen   // 6
+        {-2, -3, -4, -6, -5, -4, -3, -2},
+        {-1, -1, -1, -1, -1, -1, -1, -1,},
+        {0, 0, 0, 0, 0, 0, 0, 0,},
+        {0, 0, 0, 0, 0, 0, 0, 0,},
+        {0, 0, 0, 0, 0, 0, 0, 0,},
+        {0, 0, 0, 0, 0, 0, 0, 0,},
+        {2, 3, 4, 6, 5, 4, 3, 2,},
+        {1, 1, 1, 1, 1, 1, 1, 1,}
+    };
+    ChessPiece* boardKey[7] = {
+            0,      // 0 | No piece
+            new Pawn,   // 1
+            new Rook,   // 2
+            new Knight, // 3
+            new Bishop, // 4
+            new King,   // 5
+            new Queen   // 6
     };
 
 public:
-    ChessPiece getPieceatPos( int x, int y);
+    Board();
+    ChessPiece* getPieceatPos( int x, int y);
     void setPieceatPos( ChessPiece* piece, int side, int x, int y) {
-        board[ std::distance(boardKey, std::find(boardKey, boardKey+7, Piece)) * side]; // boardKey has a size of 7
+        gameboard[ std::distance(boardKey, std::find(boardKey, boardKey+7, piece)) * side]; // boardKey has a size of 7
     }
 };
 
