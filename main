@@ -1,0 +1,52 @@
+#include <iostream>
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+
+
+int main() {
+    sf::Texture board,wp,wr,wb,wn,wq,wk,bp,br,bb,bn,bq,bk;
+    board.loadFromFile("Sprites/board.png");
+    wp.loadFromFile("Sprites/Chess_plt45.svg.png");
+    wr.loadFromFile("Sprites/Chess_rlt45.svg.png");
+    wb.loadFromFile("Sprites/Chess_blt45.svg.png");
+    wn.loadFromFile("Sprites/Chess_nlt45.svg.png");
+    wq.loadFromFile("Sprites/Chess_qlt45.svg.png");
+    wk.loadFromFile("Sprites/Chess_klt45.svg.png");
+    bp.loadFromFile("Sprites/Chess_pdt45.svg.png");
+    br.loadFromFile("Sprites/Chess_rdt45.svg.png");
+    bb.loadFromFile("Sprites/Chess_bdt45.svg.png");
+    bn.loadFromFile("Sprites/Chess_ndt45.svg.png");
+    bq.loadFromFile("Sprites/Chess_qdt45.svg.png");
+    bk.loadFromFile("Sprites/Chess_kdt45.svg.png");
+
+    sf::Sprite chessBoard;
+    chessBoard.setTexture(board);
+    chessBoard.setScale(.685,.685);
+    sf::Sprite whitePawn;
+    whitePawn.setTexture(wp);
+
+
+    sf::RenderWindow window(sf::VideoMode(800, 800), "Chess 2: The Sequel");
+    sf::Event event;
+    while (window.isOpen()){
+        while(window.pollEvent(event)){
+            if(event.type == sf::Event::Closed){
+                window.close();
+            }
+
+            window.clear();
+            window.draw(chessBoard);
+            window.draw(whitePawn);
+            whitePawn.setPosition(15,700);
+            whitePawn.setScale(.1,.1);
+            window.display();
+
+
+
+
+        }
+    }
+
+
+    return 0;
+}
