@@ -13,6 +13,16 @@ link_directories("${SFML_DIR}/lib")
 
 find_package(SFML COMPONENTS system window graphics)
 
-add_executable(${PROJECT_NAME} main.cpp Board/Board.cpp Board/Board.h ChessPiece/ChessPiece.h Util.h)
+add_executable(${PROJECT_NAME}
+        main.cpp
+        Board/Board.cpp Board/Board.h
+        ChessPiece/ChessPiece.h
+        ChessPiece/Pawn/Pawn.cpp ChessPiece/Pawn/Pawn.h
+        ChessPiece/King/King.cpp ChessPiece/King/King.h
+        ChessPiece/Queen/Queen.cpp ChessPiece/Queen/Queen.h
+        ChessPiece/Bishop/Bishop.cpp ChessPiece/Bishop/Bishop.h
+        ChessPiece/Knight/Knight.cpp ChessPiece/Knight/Knight.h
+        ChessPiece/Rook/Rook.cpp ChessPiece/Rook/Rook.h
+        )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system)

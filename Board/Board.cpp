@@ -4,32 +4,18 @@
 
 #include "Board.h"
 
+
+/**
+ *
+ * @param x - the x coordinate of the chess piece
+ * @param y - the y coordinate of the chess piece
+ * @return - 0 when no piece is found. A chess piece when a piece is found.
+ */
 ChessPiece Board::getPieceatPos(int x, int y)
 {
-    if( (x >= 0 && x < size[0]) && (y >= 0 && y < size[1])) // in bounds
+    if( (x >= 0 && x < size[0]) && (y >= 0 && y < size[1])) // in bounds check
         return boardKey[ gameboard[y][x] ];
     else
         return 0;
 };
 
-Point Board::calculatePossibleMoves(ChessPiece piece, int x, int y) {
-    Point posMoves = piece.getPossibleMoves();  // List of the precalculated moves
-    Point validMoves; // List of the moves that are possible
-
-    for( int i=0; i < posMoves.dx.length(); ++i ) {
-        ChessPiece item = getPieceatPos( posMoves.dx[i]+x, posMoves.dy[i]+y );
-        if(item && item.side == NO_PIECE) {
-            validMoves.dx.push_back(posMoves.dx[i] + x);
-            validMoves.dy.push_back(posMoves.dy[i] + y);
-        }
-    // List of precalculated attacks
-    posMoves = piece.getPossibleAttacks();
-    for( int i=0; i < posMoves.dx.length(); ++i ) {
-        ChessPiece item = getPieceatPos( posMoves.dx[i]+x, posMoves.dy[i]+y);
-        if( item && item.side == !piece.side ) {
-            validMoves.dx.push_back(posMoves.dx[i] + x);
-            validMoves.dy.push_back(posMoves.dy[i] + y);
-        }
-
-    return validMoves;
-}
