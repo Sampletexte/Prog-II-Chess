@@ -9,7 +9,8 @@
 
 class Pawn : public ChessPiece {
 public:
-    Pawn(); // Default contructor - Precalculates all of the possible moves
+    Pawn(); // Default contructor
+    RelativeActions Pawn::getPossibleMoves(Board *board, int x, int y);
 };
 
 

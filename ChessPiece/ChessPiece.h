@@ -10,15 +10,23 @@
 #define WHITE 1
 
 #include <vector>
+#include "../Board/Board.h" // I am worried about a circular dependency error here
 
 
+struct RelativeActions {
+    std::vector< int[2] > pnts;
+};
 
 
-
+// The base class for all chess pieces
 class ChessPiece {
-private:
-    int side = NO_PIECE;    // Overwrite in other class declarations
+protected:
+    int side = NO_PIECE;
+public:
+    void setSide( int side ) { this->side = side; };
+    int getSide() { return side; };
 
+    virtual RelativeActions getPossibleMoves(Board *board, int x, int y) = 0; // Must be defined in the child classes
 };
 
 
