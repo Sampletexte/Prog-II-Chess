@@ -10,8 +10,12 @@
 #define WHITE 1
 
 #include <vector>
+<<<<<<< HEAD
 #include "../Board/Board.h" // I am worried about a circular dependency error here
 #include <string>
+=======
+//#include "../Board/Board.h" // I am worried about a circular dependency error here
+>>>>>>> fae0fb0794604feaa45d2093e1cdec65a5df88fe
 
 
 struct RelativeActions {
@@ -28,7 +32,7 @@ public:
     void setSide( int side ) { this->side = side; };
     int getSide() { return side; };
 
-    virtual RelativeActions getPossibleMoves(Board *board, int x, int y) = 0; // Must be defined in the child classes
+    //virtual RelativeActions getPossibleMoves(Board *board, int x, int y) = 0; // Will be defined in the child classes if not no piece.
 };
 
 

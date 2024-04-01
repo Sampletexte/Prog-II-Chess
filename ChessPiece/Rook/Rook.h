@@ -10,6 +10,7 @@
 class Rook : public ChessPiece {
 public:
     Rook(); // Default contructor - Precalculates all of the possible moves
+//    RelativeActions getPossibleMoves(Board *board, int x, int y);
 };
 
 

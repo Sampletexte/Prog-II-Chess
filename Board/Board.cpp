@@ -4,10 +4,20 @@
 
 #include "Board.h"
 
-Board::Board()  {
-//    // Initialize a pointer array of chess pieces. Each index corresponds to a number on the gameboard.
-//    boardKey =
+Board::Board()  {}  // Remove later
+
+void Board::setPieceatPos( ChessPiece* piece, int x, int y) {
+    gameboard[ std::distance(boardKey, std::find(boardKey, boardKey+7, piece)) * piece->getSide()]; // boardKey has a size of 7
 }
+
+void Board::MovePiece(int old_x, int old_y, int new_x, int new_y) {
+    ChessPiece* piece = getPieceatPos( old_x, old_y);
+
+    ChessPiece * no_piece = boardKey[0];   // Empty piece
+    setPieceatPos(no_piece, old_x, old_y);
+
+    setPieceatPos(piece, new_x, new_y);
+};
 
 
 /**

@@ -11,7 +11,7 @@
 class Pawn : public ChessPiece {
 public:
     Pawn(); // Default contructor
-    RelativeActions Pawn::getPossibleMoves(Board *board, int x, int y);
+//    RelativeActions getPossibleMoves(Board *board, int x, int y);
 };
 
 

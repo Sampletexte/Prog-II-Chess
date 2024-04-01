@@ -5,13 +5,13 @@
 #ifndef PROG_II_CHESS_QUEEN_H
 #define PROG_II_CHESS_QUEEN_H
 
-#include "../Bishop/Bishop.h"
-#include "../Rook/Rook.h"
+#include "../ChessPiece.h"
 
 // The Queen moveset is a combination of the Rook and Bishop.
 class Queen : public ChessPiece {
 public:
     Queen(); // Default contructor
+//    RelativeActions getPossibleMoves(Board *board, int x, int y);
 };
 
 

@@ -10,6 +10,7 @@
 class Knight : public ChessPiece {
 public:
     Knight(); // Default contructor - Precalculates all of the possible moves
+//    RelativeActions getPossibleMoves(Board *board, int x, int y);
 };
 
 
