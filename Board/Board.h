@@ -26,14 +26,14 @@ private:
         { new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0) },
         { new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0) },
         { new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0) },
-        { new Rook(2), new Knight(1), new Bishop(1), new Queen(1), new King(1), new Bishop(1), new Knight(1), new Rook(2) },
+        { new Rook(1), new Knight(1), new Bishop(1), new Queen(1), new King(1), new Bishop(1), new Knight(1), new Rook(2) },
         { new Pawn(1), new Pawn(1), new Pawn(1), new Pawn(1), new Pawn(1), new Pawn(1), new Pawn(1), new Pawn(1) }
     };
 
 public:
     Board();
-//    int getPieceatPos( int x, int y);
-//    void setPieceatPos( ChessPiece* piece, int x, int y);
+    ChessPiece* getPieceatPos( int x, int y ) { return gameboard[y][x]; };
+    void setPieceatPos( ChessPiece* piece, int x, int y) { gameboard[y][x] = piece; };
 //    void MovePiece( int old_x, int old_y, int new_x, int new_y);
 };
 
