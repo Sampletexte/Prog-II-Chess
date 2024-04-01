@@ -32,6 +32,7 @@ private:
 
 public:
     Board();
+
     ChessPiece* getPieceatPos( int x, int y ) { return gameboard[y][x]; };
     void setPieceatPos( ChessPiece* piece, int x, int y) { gameboard[y][x] = piece; };
 //    void MovePiece( int old_x, int old_y, int new_x, int new_y);

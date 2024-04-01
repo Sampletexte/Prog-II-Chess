@@ -20,6 +20,10 @@ protected:
 public:
     ChessPiece() {};
     ChessPiece( int side ) { this->side = side; };
+
+    std::string getName() { return name; };
+    void setName(std::string name) { this->name = name; };
+
     void setSide( int side ) { this->side = side; };
     int getSide() { return side; };
 
