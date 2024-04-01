@@ -3,6 +3,9 @@
 #include <SFML/Graphics.hpp>
 
 
+
+
+
 int main() {
     sf::Texture board,wp,wr,wb,wn,wq,wk,bp,br,bb,bn,bq,bk;
     board.loadFromFile("Sprites/board.png");
@@ -21,7 +24,7 @@ int main() {
 
     sf::Sprite chessBoard;
     chessBoard.setTexture(board);
-    chessBoard.setScale(.685,.685);
+    chessBoard.setScale(.68493150684,.68610634648 );
     sf::Sprite whitePawn;
     whitePawn.setTexture(wp);
 
@@ -37,8 +40,8 @@ int main() {
             window.clear();
             window.draw(chessBoard);
             window.draw(whitePawn);
-            whitePawn.setPosition(15,700);
-            whitePawn.setScale(.1,.1);
+            whitePawn.setPosition(100,700);
+            whitePawn.setScale(.125,.125);
             window.display();
 
 
