@@ -11,6 +11,8 @@
 class Pawn : public ChessPiece {
 public:
     Pawn(); // Default contructor
+    Pawn(int side) : ChessPiece( side ) {};
+
 //    RelativeActions getPossibleMoves(Board *board, int x, int y);
 };
 

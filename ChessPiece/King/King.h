@@ -10,6 +10,7 @@
 class King : public ChessPiece {
 public:
     King(); // Default contructor - Precalculates all of the possible moves
+    King(int side) : ChessPiece( side ) {};
 //    RelativeActions getPossibleMoves(Board *board, int x, int y);
 };
 

@@ -18,32 +18,23 @@
 
 class Board {
 private:
-    int size[2] = {8,8};
-    int gameboard[8][8] = {
-        {-2, -3, -4, -6, -5, -4, -3, -2},
-        {-1, -1, -1, -1, -1, -1, -1, -1,},
-        {0, 0, 0, 0, 0, 0, 0, 0,},
-        {0, 0, 0, 0, 0, 0, 0, 0,},
-        {0, 0, 0, 0, 0, 0, 0, 0,},
-        {0, 0, 0, 0, 0, 0, 0, 0,},
-        {2, 3, 4, 6, 5, 4, 3, 2,},
-        {1, 1, 1, 1, 1, 1, 1, 1,}
-    };
-    ChessPiece* boardKey[7] = {
-            0,      // 0 | No piece
-            new Pawn,   // 1
-            new Rook,   // 2
-            new Knight, // 3
-            new Bishop, // 4
-            new King,   // 5
-            new Queen   // 6
+    int size[2] = {8, 8};
+    ChessPiece *gameboard[8][8] = {
+        { new Rook(-1), new Knight(-1), new Bishop(-1), new Queen(-1), new King(-1), new Bishop(-1), new Knight(-1), new Rook(-1)},
+        { new Pawn(-1), new Pawn(-1), new Pawn(-1), new Pawn(-1), new Pawn(-1), new Pawn(-1), new Pawn(-1), new Pawn(-1) },
+        { new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0) },
+        { new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0) },
+        { new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0) },
+        { new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0), new ChessPiece(0) },
+        { new Rook(2), new Knight(1), new Bishop(1), new Queen(1), new King(1), new Bishop(1), new Knight(1), new Rook(2) },
+        { new Pawn(1), new Pawn(1), new Pawn(1), new Pawn(1), new Pawn(1), new Pawn(1), new Pawn(1), new Pawn(1) }
     };
 
 public:
     Board();
-    ChessPiece* getPieceatPos( int x, int y);
-    void setPieceatPos( ChessPiece* piece, int x, int y);
-    void MovePiece( int old_x, int old_y, int new_x, int new_y);
+//    int getPieceatPos( int x, int y);
+//    void setPieceatPos( ChessPiece* piece, int x, int y);
+//    void MovePiece( int old_x, int old_y, int new_x, int new_y);
 };
 
 

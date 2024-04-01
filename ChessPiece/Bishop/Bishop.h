@@ -10,6 +10,7 @@
 class Bishop : public ChessPiece {
 public:
     Bishop(); // Default contructor - Precalculates all of the possible moves
+    Bishop(int side) : ChessPiece( side ) {};
 //    RelativeActions getPossibleMoves(Board *board, int x, int y);
 };
 
