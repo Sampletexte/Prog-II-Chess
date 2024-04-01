@@ -5,7 +5,7 @@
 #include "Pawn.h"
 
 Pawn::Pawn() {
-    name = "pawn";
+    name = 'p';
 };
 
 

@@ -4,6 +4,8 @@
 
 #include "Rook.h"
 
-Rook::Rook() {};
+Rook::Rook() {
+    name = 'r';
+};
 
 //RelativeActions Rook::getPossibleMoves(Board *board, int x, int y) {};

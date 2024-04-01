@@ -5,7 +5,7 @@
 #include "King.h"
 
 King::King() {
-    name = "king";
+    name = 'k';
 };
 
 //RelativeActions King::getPossibleMoves(Board *board, int x, int y) {};

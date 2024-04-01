@@ -9,6 +9,7 @@
 #include "../ChessPiece.h"
 
 class Pawn : public ChessPiece {
+protected:
 public:
     Pawn(); // Default contructor
     Pawn(int side) : ChessPiece( side ) {};

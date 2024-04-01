@@ -2,6 +2,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
+#include "/Board/Board.h"
 
 
 
@@ -31,6 +32,7 @@ int main() {
     whiteBishop.setTexture(wb);
 
 
+    Board gameboard;
 
 
     sf::RenderWindow window(sf::VideoMode(800, 800), "Chess 2: The Sequel");
@@ -43,7 +45,16 @@ int main() {
 
             window.clear();
             window.draw(chessBoard);
-            window.draw(whitePawn);
+            for(int y_ind = 0; y_ind < 8; y_ind++ ){
+                for(int x_ind = 0; x_ind < 8; x_ind++ ){
+                    ChessPiece *tempPiece = gameboard.getPieceatPos(x_ind,y_ind);
+                    if(tempPiece->getSide() == WHITE){
+                        switch(tempPiece->getName()){
+
+                        }
+                    }
+                }
+            }
             whitePawn.setPosition(100,700);
             whitePawn.setScale(.125,.125);
             window.display();

@@ -4,6 +4,8 @@
 
 #include "Queen.h"
 
-Queen::Queen() {};
+Queen::Queen() {
+    name = 'q';
+};
 
 //RelativeActions Queen::getPossibleMoves(Board *board, int x, int y) {};

@@ -16,13 +16,13 @@
 class ChessPiece {
 protected:
     int side = NO_PIECE;
-    std::string name;
+    char name = 'e';
 public:
     ChessPiece() {};
     ChessPiece( int side ) { this->side = side; };
 
-    std::string getName() { return name; };
-    void setName(std::string name) { this->name = name; };
+    char getName() { return name; };
+    void setName(char name) { this->name = name; };
 
     void setSide( int side ) { this->side = side; };
     int getSide() { return side; };

@@ -4,6 +4,8 @@
 
 #include "Knight.h"
 
-Knight::Knight() {};
+Knight::Knight() {
+    name = 'n';
+};
 
 //RelativeActions Knight::getPossibleMoves(Board *board, int x, int y) {};
