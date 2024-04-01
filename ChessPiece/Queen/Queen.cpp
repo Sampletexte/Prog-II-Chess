@@ -4,4 +4,6 @@
 
 #include "Queen.h"
 
-Queen::Queen() {};
+Queen::Queen() {
+    name = "queen";
+};

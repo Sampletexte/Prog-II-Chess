@@ -11,6 +11,7 @@
 
 #include <vector>
 #include "../Board/Board.h" // I am worried about a circular dependency error here
+#include <string>
 
 
 struct RelativeActions {
@@ -21,6 +22,7 @@ struct RelativeActions {
 // The base class for all chess pieces
 class ChessPiece {
 protected:
+    std::string name = "empty";
     int side = NO_PIECE;
 public:
     void setSide( int side ) { this->side = side; };

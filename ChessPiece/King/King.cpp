@@ -4,5 +4,7 @@
 
 #include "King.h"
 
-King::King() {};
+King::King() {
+    name = "king";
+};
 

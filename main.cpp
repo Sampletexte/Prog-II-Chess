@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-
+#include <unordered_map>
 
 
 
@@ -27,6 +27,10 @@ int main() {
     chessBoard.setScale(.68493150684,.68610634648 );
     sf::Sprite whitePawn;
     whitePawn.setTexture(wp);
+    sf::Sprite whiteBishop;
+    whiteBishop.setTexture(wb);
+
+
 
 
     sf::RenderWindow window(sf::VideoMode(800, 800), "Chess 2: The Sequel");
