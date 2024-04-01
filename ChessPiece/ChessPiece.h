@@ -10,12 +10,13 @@
 #define WHITE 1
 
 #include <vector>
-
+#include <string>
 
 // The base class for all chess pieces
 class ChessPiece {
 protected:
     int side = NO_PIECE;
+    std::string name;
 public:
     ChessPiece() {};
     ChessPiece( int side ) { this->side = side; };
