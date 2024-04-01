@@ -7,6 +7,7 @@
 
 #include <algorithm>
 
+//#include "../ChessPiece/ChessPiece.h"
 #include "../ChessPiece/Pawn/Pawn.h"
 #include "../ChessPiece/King/King.h"
 #include "../ChessPiece/Queen/Queen.h"
@@ -41,9 +42,8 @@ private:
 public:
     Board();
     ChessPiece* getPieceatPos( int x, int y);
-    void setPieceatPos( ChessPiece* piece, int side, int x, int y) {
-        gameboard[ std::distance(boardKey, std::find(boardKey, boardKey+7, piece)) * side]; // boardKey has a size of 7
-    }
+    void setPieceatPos( ChessPiece* piece, int x, int y);
+    void MovePiece( int old_x, int old_y, int new_x, int new_y);
 };
 
 

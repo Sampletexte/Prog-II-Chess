@@ -6,3 +6,4 @@
 
 King::King() {};
 
+//RelativeActions King::getPossibleMoves(Board *board, int x, int y) {};

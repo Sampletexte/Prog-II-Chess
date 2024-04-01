@@ -5,3 +5,5 @@
 #include "Queen.h"
 
 Queen::Queen() {};
+
+//RelativeActions Queen::getPossibleMoves(Board *board, int x, int y) {};

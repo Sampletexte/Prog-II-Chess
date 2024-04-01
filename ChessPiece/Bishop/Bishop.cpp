@@ -5,3 +5,5 @@
 #include "Bishop.h"
 
 Bishop::Bishop() {};
+
+//RelativeActions Bishop::getPossibleMoves(Board *board, int x, int y) {};
