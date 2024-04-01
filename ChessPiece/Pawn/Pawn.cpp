@@ -4,7 +4,9 @@
 
 #include "Pawn.h"
 
-Pawn::Pawn() {};
+Pawn::Pawn() {
+    name = "pawn";
+};
 
 
 //RelativeActions Pawn::getPossibleMoves(Board *board, int x, int y) {};

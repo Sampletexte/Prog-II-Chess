@@ -4,6 +4,8 @@
 
 #include "King.h"
 
-King::King() {};
+King::King() {
+    name = "king";
+};
 
 //RelativeActions King::getPossibleMoves(Board *board, int x, int y) {};

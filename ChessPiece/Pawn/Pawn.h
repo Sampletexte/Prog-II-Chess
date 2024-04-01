@@ -5,6 +5,7 @@
 #ifndef PROG_II_CHESS_PAWN_H
 #define PROG_II_CHESS_PAWN_H
 
+
 #include "../ChessPiece.h"
 
 class Pawn : public ChessPiece {
