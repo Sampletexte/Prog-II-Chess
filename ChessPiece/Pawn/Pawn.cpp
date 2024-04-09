@@ -4,8 +4,8 @@
 
 #include "Pawn.h"
 
-Pawn::Pawn() {
-    name = 'p';
+Pawn::Pawn() : ChessPiece() {
+
 };
 
 
