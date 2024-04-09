@@ -11,7 +11,7 @@
 class Queen : public ChessPiece {
 public:
     Queen(); // Default contructor
-    Queen(int side) : ChessPiece( side ) {};
+    Queen(int side) : ChessPiece( side ) { setName('q'); };
 
 //    RelativeActions getPossibleMoves(Board *board, int x, int y);
 };

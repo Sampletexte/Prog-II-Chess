@@ -73,33 +73,33 @@ int main() {
 
 
 
-                sf::RenderWindow window(sf::VideoMode(800, 800), "Chess 2: The Sequel");
-                sf::Event event;
-                while (window.isOpen()) {
-                    while (window.pollEvent(event)) {
-                        if (event.type == sf::Event::Closed) {
-                            window.close();
-                        }
+    sf::RenderWindow window(sf::VideoMode(800, 800), "Chess 2: The Sequel");
+    sf::Event event;
+    while (window.isOpen()) {
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
 
-                        window.clear();
-                        window.draw(chessBoard);
-                        // Try using set texture Rect
-                        // combingi nall the pngs into one larger file, sort by X and Y and by width and height (800 by 800)
-                        for (int y_ind = 0; y_ind < 8; y_ind++) {
-                            for (int x_ind = 0; x_ind < 8; x_ind++) {
-                                ChessPiece *tempPiece = gameboard.getPieceatPos(x_ind, y_ind);
-                                if (tempPiece->getSide() == WHITE) {
-                                    sf::Sprite piece = whiteTextureMap[tempPiece->getName()];
-                                    piece.setPosition(x_ind * 100, y_ind * 100);
-                                    piece.setScale(.125,.125);
-                                    }
-                                }
-                            }
-                        }
-
-
-                        window.display();
-
+            window.clear();
+            window.draw(chessBoard);
+            // Try using set texture Rect
+            // combingin all the pngs into one larger file, sort by X and Y and by width and height (800 by 800)
+            for (int y_ind = 0; y_ind < 8; y_ind++) {
+                for (int x_ind = 0; x_ind < 8; x_ind++) {
+                    ChessPiece *tempPiece = gameboard.getPieceatPos(x_ind, y_ind);
+                    if (tempPiece->getSide() == WHITE) {
+                        sf::Sprite piece = whiteTextureMap[tempPiece->getName()];
+                        piece.setPosition(x_ind * 100, y_ind * 100);
+                        piece.setScale(.125,.125);
                     }
-                return 0;
                 }
+            }
+        }
+
+
+        window.display();
+
+    }
+    return 0;
+}
