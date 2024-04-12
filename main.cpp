@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 #include "Board/Board.h"
+#include <cmath>
 
 
 
@@ -66,6 +67,8 @@ int main() {
 //        blackTextureMap[charList[i]] = sf::Sprite(tempTexture);
 //    }
 
+
+//APLOGIES HERE IS A TEXTURE DUMP
     sf::Sprite whitePawn;
     whitePawn.setTexture(wp);
     sf::Sprite whiteBishop;
@@ -93,18 +96,30 @@ int main() {
     blackKnight.setTexture(bn);
 
 
+
+
     sf::RenderWindow window(sf::VideoMode(800, 800), "Chess 2: The Sequel", sf::Style::Default);
     sf::Event event;
+
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
 
+
+            //FRAMEWORK FOR SELECTING A PIECE TO MOVE, NEED TO CREATE MOVEPIECE FUNCTION
+            if (event.type == sf::Event::MouseButtonPressed) {
+                ChessPiece *selectPiece = gameboard.getPieceatPos(floor(sf::Mouse::getPosition().x),
+                                                                  (floor(sf::Mouse::getPosition().y)));
+                //void MovePiece( int old_x, int old_y, int new_x, int new_y);
+
+            }
+
             window.clear();
             window.draw(chessBoard);
-            // Try using set texture Rect
-            // combingin all the pngs into one larger file, sort by X and Y and by width and height (800 by 800)
+
+            //SWITCH CASE TO DISPLAY EVERY PIECE ON BOARD
             for (int y_ind = 0; y_ind < 8; y_ind++) {
                 for (int x_ind = 0; x_ind < 8; x_ind++) {
                     ChessPiece *tempPiece = gameboard.getPieceatPos(x_ind, y_ind);
@@ -141,7 +156,6 @@ int main() {
                                 window.draw(whiteKing);
                                 break;
                         };
-
 
                     } else if (tempPiece->getSide() == BLACK) {
                         switch (tempPiece->getName()) {
