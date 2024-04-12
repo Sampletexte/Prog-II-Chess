@@ -5,12 +5,18 @@
 #ifndef PROG_II_CHESS_CHESSPIECE_H
 #define PROG_II_CHESS_CHESSPIECE_H
 
+
 #define BLACK -1
 #define NO_PIECE 0
 #define WHITE 1
 
 #include <vector>
 #include <string>
+
+struct Point {
+    int x, y;
+};
+
 
 // The base class for all chess pieces
 class ChessPiece {
@@ -27,6 +33,7 @@ public:
     void setSide( int side ) { this->side = side; };
     int getSide() { return side; };
 
+    virtual std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY) { return std::vector<Point>{}; };   // You will have ot pass in the gameboard
 };
 
 
