@@ -96,10 +96,16 @@ int main() {
     blackKnight.setTexture(bn);
 
 
-
-
     sf::RenderWindow window(sf::VideoMode(800, 800), "Chess 2: The Sequel", sf::Style::Default);
     sf::Event event;
+
+
+    bool isSelected = false;
+    ChessPiece *selectPiece = nullptr;
+
+    int xPosOrig;
+    int yPosOrig;
+
 
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
@@ -107,16 +113,50 @@ int main() {
                 window.close();
             }
 
+            if (event.type == sf::Event::MouseButtonPressed && isSelected == true){
+                std::cout <<"log2";
+                int xPosNew = floor(sf::Mouse::getPosition(window).x / 100);
+                int yPosNew = floor(sf::Mouse::getPosition(window).y / 100);
 
-            //FRAMEWORK FOR SELECTING A PIECE TO MOVE, NEED TO CREATE MOVEPIECE FUNCTION
-            if (event.type == sf::Event::MouseButtonPressed) {
-                ChessPiece *selectPiece = gameboard.getPieceatPos(floor(sf::Mouse::getPosition().x),
-                                                                  (floor(sf::Mouse::getPosition().y)));
-                //void MovePiece( int old_x, int old_y, int new_x, int new_y);
+                // get the point of the user click
+                Point moveSelect {xPosNew, yPosNew};
 
+                ChessPiece * confirmSelect = gameboard.getPieceatPos(xPosNew, yPosNew);
+
+                std::vector<Point> validSelect = selectPiece->getPossibleMoves(gameboard.getGameboard(), xPosOrig, yPosOrig);
+
+                for(int i = 0; i < validSelect.size(); i++){
+                    if(moveSelect.x == validSelect[i].x && moveSelect.y == validSelect[i].y){
+                        gameboard.setPieceatPos(selectPiece,xPosNew,yPosNew);
+                        gameboard.setPieceatPos(new ChessPiece(0),xPosOrig,yPosOrig);
+                        isSelected = false;
+                        xPosOrig = 0;
+                        yPosOrig = 0;
+                    }
+                }
             }
 
-            window.clear();
+            //FRAMEWORK FOR SELECTING A PIECE TO MOVE, NEED TO CREATE MOVEPIECE FUNCTION
+            else if (event.type == sf::Event::MouseButtonPressed && isSelected == false) {
+                std::cout << "log1";
+                // Get the X and Y position of where the button was pressed
+                xPosOrig = floor(sf::Mouse::getPosition(window).x / 100);
+                yPosOrig = floor(sf::Mouse::getPosition(window).y / 100);
+
+                //create temporary variable
+                selectPiece = gameboard.getPieceatPos(xPosOrig,yPosOrig);
+
+                //if the selected piece is not an empty square
+                if (selectPiece->getName() != 'e') {
+                    //this bool marks that the user has a selected piece
+                    isSelected = true;
+                }
+            };
+
+
+
+
+                window.clear();
             window.draw(chessBoard);
 
             //SWITCH CASE TO DISPLAY EVERY PIECE ON BOARD
@@ -166,27 +206,27 @@ int main() {
                                 break;
                             case 'r':
                                 blackRook.setPosition(x_ind * 100, y_ind * 100);
-                                blackRook.setScale(.125,.125);
+                                blackRook.setScale(.125, .125);
                                 window.draw(blackRook);
                                 break;
                             case 'b':
                                 blackBishop.setPosition(x_ind * 100, y_ind * 100);
-                                blackBishop.setScale(.125,.125);
+                                blackBishop.setScale(.125, .125);
                                 window.draw(blackBishop);
                                 break;
                             case 'n':
                                 blackKnight.setPosition(x_ind * 100, y_ind * 100);
-                                blackKnight.setScale(.125,.125);
+                                blackKnight.setScale(.125, .125);
                                 window.draw(blackKnight);
                                 break;
                             case 'q':
                                 blackQueen.setPosition(x_ind * 100, y_ind * 100);
-                                blackQueen.setScale(.125,.125);
+                                blackQueen.setScale(.125, .125);
                                 window.draw(blackQueen);
                                 break;
                             case 'k':
                                 blackKing.setPosition(x_ind * 100, y_ind * 100);
-                                blackKing.setScale(.125,.125);
+                                blackKing.setScale(.125, .125);
                                 window.draw(blackKing);
                                 break;
                         };
