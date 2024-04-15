@@ -36,8 +36,8 @@ private:
 public:
     Board();
 
-    ChessPiece* getPieceatPos( int x, int y ) { return gameboard[y][x]; };
-    void setPieceatPos( ChessPiece* piece, int x, int y) { gameboard[y][x] = piece; };
+    ChessPiece* getPieceatPos( int x, int y );
+    void setPieceatPos( ChessPiece* piece) { gameboard[piece->getPos().x][piece->getPos().y] = piece; };
 
     std::vector<std::vector<ChessPiece *>> * getGameboard() { return &gameboard; };
 };
