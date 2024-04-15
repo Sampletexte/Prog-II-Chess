@@ -4,6 +4,9 @@
 
 //    RelativeActions getPossibleMoves(Board *board, int x, int y);
 
+Bishop::Bishop() {};
+
+
 std::vector<Point> Bishop::getPossibleMoves(std::vector<std::vector<ChessPiece *>> *gameboard, int posX, int posY) {
     std::vector<Point> validMoves;
     // Check diagonally (up-right)

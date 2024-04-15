@@ -6,8 +6,6 @@
 #define PROG_II_CHESS_BISHOP_H
 
 #include "../ChessPiece.h"
-#include "../../Board/Board.h"
-
 
 class Bishop : public ChessPiece {
 public:
