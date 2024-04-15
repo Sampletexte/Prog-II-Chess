@@ -8,4 +8,4 @@ Bishop::Bishop() {
     name = 'b';
 };
 
-//RelativeActions Bishop::getPossibleMoves(Board *board, int x, int y) {};
+//std::vector<Point> Bishop::getPossibleMoves(Board *board, int x, int y) {};

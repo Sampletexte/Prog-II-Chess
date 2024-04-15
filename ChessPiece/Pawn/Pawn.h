@@ -14,7 +14,7 @@ public:
     Pawn(); // Default contructor
     Pawn(int side) : ChessPiece( side ) { setName('p'); };
 
-//    RelativeActions getPossibleMoves(Board *board, int x, int y);
+    std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY);
 };
 
 
