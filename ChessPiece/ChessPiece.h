@@ -23,9 +23,13 @@ class ChessPiece {
 protected:
     int side = NO_PIECE;
     char name = 'e';
+    Point pos;
 public:
     ChessPiece() {};
     ChessPiece( int side ) { this->side = side; };
+
+    Point getPos() { return pos; }
+    void setPos(Point pos) { this->pos = pos;}
 
     char getName() { return name; };
     void setName(char name) { this->name = name; };
