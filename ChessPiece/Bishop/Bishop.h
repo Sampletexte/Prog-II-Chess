@@ -6,12 +6,14 @@
 #define PROG_II_CHESS_BISHOP_H
 
 #include "../ChessPiece.h"
+#include "../../Board/Board.h"
+
 
 class Bishop : public ChessPiece {
 public:
     Bishop(); // Default contructor - Precalculates all of the possible moves
     Bishop(int side) : ChessPiece( side ) { setName('b'); };
-    std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY) { return std::vector<Point>{}; };;
+    std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY);
 };
 
 
