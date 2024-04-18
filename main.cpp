@@ -6,7 +6,7 @@
 #include <cmath>
 
 
-
+void drawboard();
 
 int main() {
 
@@ -34,38 +34,6 @@ int main() {
     sf::Sprite pawntest;
     pawntest.setTexture(wp);
     pawntest.setScale(.125, .125);
-
-//    //Create list of textures for white pieces
-//    std::string whiteTextureList[6] = {"Sprites/Chess_plt45.svg.png", "Sprites/Chess_rlt45.svg.png",
-//                                       "Sprites/Chess_blt45.svg.png",
-//                                       "Sprites/Chess_nlt45.svg.png", "Sprites/Chess_qlt45.svg.png",
-//                                       "Sprites/Chess_klt45.svg.png"};
-//
-//    //Create list of texture for black pieces
-//    std::string blackTextureList[6] = {"Sprites/Chess_pdt45.svg.png", "Sprites/Chess_rdt45.svg.png",
-//                                       "Sprites/Chess_bdt45.svg.png",
-//                                       "Sprites/Chess_ndt45.svg.png", "Sprites/Chess_qdt45.svg.png",
-//                                       "Sprites/Chess_kdt45.svg.png"};
-//
-//    //Create list of
-//    char charList[6] = {'p', 'b', 'q', 'k', 'r', 'n'};
-//
-//    //Empty maps for white and black pieces
-//    std::unordered_map<char, sf::Sprite> whiteTextureMap{};
-//    std::unordered_map<char, sf::Sprite> blackTextureMap{};
-//
-//
-//    for (int i = 0; i < 6; i++) {
-//        sf::Texture tempTexture;
-//        tempTexture.loadFromFile(whiteTextureList[i]);
-//        whiteTextureMap[charList[i]] = sf::Sprite(tempTexture);
-//    }
-//
-//    for (int i = 0; i < 6; i++) {
-//        sf::Texture tempTexture;
-//        tempTexture.loadFromFile(blackTextureList[i]);
-//        blackTextureMap[charList[i]] = sf::Sprite(tempTexture);
-//    }
 
 
 //Create Sprites for everything
@@ -112,6 +80,21 @@ int main() {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+
+            //Function to locate White King and Black King
+//             for(int y_ind = 0; y_ind < 8; y_ind++) {
+//                for (int x_ind = 0; x_ind < 8; x_ind++) {
+//                    ChessPiece *tempPiece = gameboard.getPieceatPos(x_ind,y_ind);
+//                    if(tempPiece->getName() == 'k' && tempPiece->getSide() == WHITE){
+//                        ChessPiece *whiteKing = tempPiece;
+//                    }
+//                    if(tempPiece->getName() == 'k' && tempPiece->getSide() == BLACK){
+//                        ChessPiece *blackKing = tempPiece;
+//                    }
+//                }
+//             }
+
+
             //If the user selects a square after selecting a piece
             if (event.type == sf::Event::MouseButtonPressed && isSelected == true) {
                 //std::cout << "log2";
@@ -129,7 +112,14 @@ int main() {
                     if (moveSelect.x == validSelect[i].x && moveSelect.y == validSelect[i].y) {
                         gameboard.setPieceatPos(selectPiece, xPosNew, yPosNew);
                         gameboard.setPieceatPos(new ChessPiece(0), xPosOrig, yPosOrig);
-
+                    // If white piece is pawn and reaches opposite side, promote to queen
+                    if (selectPiece->getSide() == WHITE && selectPiece->getName() == 'p' && yPosNew == 0){
+                        gameboard.setPieceatPos(new Queen(1), xPosNew, yPosNew);
+                    }
+                    // if black piece is a pawn and reaches the opposite side, promote to queen
+                    else if(selectPiece->getSide() == BLACK && selectPiece->getName() == 'p' && yPosNew ==7){
+                        gameboard.setPieceatPos(new Queen(-1), xPosNew, yPosNew);
+                    }
                         //Resets Variables out of scope, deselects piece, switches turns
                         isSelected = false;
                         hasTurn = !hasTurn;
