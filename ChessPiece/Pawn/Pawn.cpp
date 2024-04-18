@@ -18,7 +18,7 @@ std::vector<Point> Pawn::getPossibleMoves(std::vector<std::vector<ChessPiece *>>
         if( !(posY-side < 0 || posY-side > 7) && !(posX+attX < 0 || posX+attX > 7) ) {  // If in bounds
             ChessPiece *piece = (*gameboard)[posY - side][posX + attX];
             if (piece->getSide() != side && piece->getSide() != NO_PIECE) {
-                Point pnt{posX - attX, posY - side};
+                Point pnt{posX + attX, posY - side};
                 posMovs.push_back(pnt);
             }
         }

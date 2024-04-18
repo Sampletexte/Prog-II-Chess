@@ -107,6 +107,7 @@ int main() {
                 ChessPiece *confirmSelect = gameboard.getPieceatPos(xPosNew, yPosNew);
                 //Look at valid moveset for that piece
                 std::vector<Point> validSelect = selectPiece->getPossibleMoves(gameboard.getGameboard(), xPosOrig, yPosOrig);
+
                 // Compares valid moveset to desired move, commiting the move if it is valid
                 for (int i = 0; i < validSelect.size(); i++) {
                     if (moveSelect.x == validSelect[i].x && moveSelect.y == validSelect[i].y) {
@@ -120,13 +121,13 @@ int main() {
                     else if(selectPiece->getSide() == BLACK && selectPiece->getName() == 'p' && yPosNew ==7){
                         gameboard.setPieceatPos(new Queen(-1), xPosNew, yPosNew);
                     }
-                        //Resets Variables out of scope, deselects piece, switches turns
-                        isSelected = false;
+                        //Resets Variables out of scope and switches turns
                         hasTurn = !hasTurn;
-                        xPosOrig = 0;
+                        xPosOrig = 0;   // There is no point to do this btw. It will be overwritten on the next use anyways
                         yPosOrig = 0;
                     }
                 }
+                isSelected = false; // Deselect the piece
             }
             //If the user selects a square before selecting the piece
             else if (event.type == sf::Event::MouseButtonPressed && isSelected == false) {

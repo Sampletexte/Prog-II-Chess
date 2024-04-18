@@ -11,7 +11,7 @@ class Rook : public ChessPiece {
 public:
     Rook(); // Default contructor - Precalculates all of the possible moves
     Rook(int side) : ChessPiece( side ) { setName('r'); };
-    std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY) { return std::vector<Point>{}; };;
+    std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY);
 };
 
 
