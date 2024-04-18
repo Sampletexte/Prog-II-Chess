@@ -11,7 +11,7 @@ class King : public ChessPiece {
 public:
     King(); // Default contructor - Precalculates all of the possible moves
     King(int side) : ChessPiece( side ) { setName('k'); };
-    std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY) { return std::vector<Point>{}; };;
+    std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY);
 };
 
 
