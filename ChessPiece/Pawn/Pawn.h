@@ -10,11 +10,13 @@
 
 class Pawn : public ChessPiece {
 protected:
+    bool hasTakenMove = false;
 public:
     Pawn(); // Default contructor
     Pawn(int side) : ChessPiece( side ) { setName('p'); };
 
     std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY);
+    void sethasTakenMove(){ hasTakenMove = true;};
 };
 
 

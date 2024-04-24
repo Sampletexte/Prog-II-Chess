@@ -13,7 +13,7 @@ public:
     Queen(); // Default contructor
     Queen(int side) : ChessPiece( side ) { setName('q'); };
 
-    std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY) { return std::vector<Point>{}; };;
+    std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY);
 };
 
 

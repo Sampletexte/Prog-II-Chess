@@ -4,7 +4,7 @@
 
 #include "King.h"
 
-King::King() {
+King::King():ChessPiece() {
     name = 'k';
 }
 

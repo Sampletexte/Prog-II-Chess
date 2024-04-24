@@ -4,7 +4,7 @@
 
 #include "Queen.h"
 
-Queen::Queen() {}
+Queen::Queen():ChessPiece() {}
 
 std::vector<Point> Queen::getPossibleMoves(std::vector<std::vector<ChessPiece *>> *gameboard, int posX, int posY) {
     std::vector<Point> posMovs;

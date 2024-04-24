@@ -4,7 +4,7 @@
 
 //    RelativeActions getPossibleMoves(Board *board, int x, int y);
 
-Bishop::Bishop() {};
+Bishop::Bishop():ChessPiece() {};
 
 
 std::vector<Point> Bishop::getPossibleMoves(std::vector<std::vector<ChessPiece *>> *gameboard, int posX, int posY) {

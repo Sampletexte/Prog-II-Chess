@@ -3,7 +3,7 @@
 //
 #include "Knight.h"
 
-Knight::Knight() {}
+Knight::Knight():ChessPiece() {}
 
 std::vector<Point> Knight::getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY) {
     std::vector<Point> posMovs;

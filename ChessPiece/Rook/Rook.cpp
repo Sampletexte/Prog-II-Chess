@@ -4,7 +4,7 @@
 
 #include "Rook.h"
 
-Rook::Rook() {
+Rook::Rook():ChessPiece() {
     name = 'r';
 }
 

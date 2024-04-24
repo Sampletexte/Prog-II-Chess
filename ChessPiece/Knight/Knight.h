@@ -11,8 +11,7 @@ class Knight : public ChessPiece {
 public:
     Knight(); // Default contructor - Precalculates all of the possible moves
     Knight(int side) : ChessPiece( side ) { setName('n'); };
-    std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY) { return std::vector<Point>{}; };;
-};
+    std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY); };
 
 
 #endif //PROG_II_CHESS_KNIGHT_H
