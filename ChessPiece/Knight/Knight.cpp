@@ -21,9 +21,9 @@ std::vector<Point> Knight::getPossibleMoves(std::vector<std::vector<ChessPiece *
 
         // Verify if the move is within the board boundaries
         if (newX >= 0 && newX < 8 && newY >= 0 && newY < 8) {
-            ChessPiece *piece = (*gameboard)[newX][newY];
+            ChessPiece *piece = (*gameboard)[newY][newX];
             // Add the move to validMoves if the destination is empty or contains an opponent's piece
-            if (piece->getName() == 0 || piece->getSide() != side) {
+            if (piece->getSide() == NO_PIECE || piece->getSide() == -side) {
                 posMovs.push_back(Point{newX, newY});
             }
         }
