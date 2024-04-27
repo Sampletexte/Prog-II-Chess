@@ -73,7 +73,8 @@ int main() {
     int xPosOrig;
     int yPosOrig;
     bool hasTurn = true; // White = T, Black = F
-
+    ChessPiece *whiteSideKing;
+    ChessPiece *blackSideKing;
     //Main game Logic, constant polling for events
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
@@ -82,17 +83,38 @@ int main() {
             }
 
             //Function to locate White King and Black King
-//             for(int y_ind = 0; y_ind < 8; y_ind++) {
-//                for (int x_ind = 0; x_ind < 8; x_ind++) {
-//                    ChessPiece *tempPiece = gameboard.getPieceatPos(x_ind,y_ind);
-//                    if(tempPiece->getName() == 'k' && tempPiece->getSide() == WHITE){
-//                        ChessPiece *whiteKing = tempPiece;
-//                    }
-//                    if(tempPiece->getName() == 'k' && tempPiece->getSide() == BLACK){
-//                        ChessPiece *blackKing = tempPiece;
-//                    }
-//                }
-//             }
+             for(int y_ind = 0; y_ind < 8; y_ind++) {
+                for (int x_ind = 0; x_ind < 8; x_ind++) {
+                    ChessPiece *tempPiece = gameboard.getPieceatPos(x_ind,y_ind);
+                    if(tempPiece->getName() == 'k' && tempPiece->getSide() == WHITE){
+                        whiteSideKing = tempPiece;
+                    }
+                    if(tempPiece->getName() == 'k' && tempPiece->getSide() == BLACK){
+                        blackSideKing = tempPiece;
+                    }
+                }
+             }
+
+            for(int y_ind = 0; y_ind < 8; y_ind++) {
+                for (int x_ind = 0; x_ind < 8; x_ind++) {
+                    ChessPiece *tempPiece = gameboard.getPieceatPos(x_ind, y_ind);
+                    std::vector<Point> tempPiecePossibleMoves = tempPiece->getPossibleMoves(gameboard.getGameboard(),
+                                                                                            x_ind, y_ind);
+                    for (int y_again = 0; y_again < 8; y_again++) {
+                        for (int x_again = 0; x_again < 8; x_again++) {
+                            Point checkHere ={x_again,y_again};
+                            for(int i = 0; i < tempPiecePossibleMoves.size(); i++) {
+                                if(checkHere.x == tempPiecePossibleMoves[i].x && checkHere.y == tempPiecePossibleMoves[i].y){
+                                    gameboard.getPieceatPos(x_again,y_again)->setIsUnderAttack(1);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
 
 
             //If the user selects a square after selecting a piece
@@ -121,6 +143,12 @@ int main() {
                     //Reset Variables
                     hasTurn = !hasTurn;
                     isSelected = false; // Deselect the piece
+                    //Resets Pieces Under Attack
+                    for(int y_ind = 0; y_ind < 8; y_ind++){
+                        for(int x_ind = 0; x_ind <8; x_ind++){
+                            gameboard.getPieceatPos(x_ind,y_ind)->setIsUnderAttack(0);
+                        }
+                    }
 
                 }
                 //Scenario 2: WHITE SIDE -- QUEEN SIDE
@@ -134,6 +162,12 @@ int main() {
                     //Reset Variables
                     hasTurn = !hasTurn;
                     isSelected = false; // Deselect the piece
+                    //Resets Pieces Under Attack
+                    for(int y_ind = 0; y_ind < 8; y_ind++){
+                        for(int x_ind = 0; x_ind <8; x_ind++){
+                            gameboard.getPieceatPos(x_ind,y_ind)->setIsUnderAttack(0);
+                        }
+                    }
 
                 }
                 //Scenario 3: BLACK SIDE -- KING SIDE
@@ -147,6 +181,12 @@ int main() {
                     //Reset Variables
                     hasTurn = !hasTurn;
                     isSelected = false; // Deselect the Piece
+                    //Resets Pieces Under Attack
+                    for(int y_ind = 0; y_ind < 8; y_ind++){
+                        for(int x_ind = 0; x_ind <8; x_ind++){
+                            gameboard.getPieceatPos(x_ind,y_ind)->setIsUnderAttack(0);
+                        }
+                    }
                 }
                 //Scenario 4: BLACK SIDE -- QUEEN SIDE
                 else if(selectPiece->getName() == 'k' && selectPiece->getSide()== BLACK && !selectPiece->getHasTakenMove() && gameboard.getPieceatPos(0, 0)->getSide() == BLACK && gameboard.getPieceatPos(0, 0)->getName() == 'r' &&
@@ -159,6 +199,12 @@ int main() {
                     //Reset Variables
                     hasTurn = !hasTurn;
                     isSelected = false; // Deselect the Piece
+                    //Resets Pieces Under Attack
+                    for(int y_ind = 0; y_ind < 8; y_ind++){
+                        for(int x_ind = 0; x_ind <8; x_ind++){
+                            gameboard.getPieceatPos(x_ind,y_ind)->setIsUnderAttack(0);
+                        }
+                    }
                 }
 
 
@@ -183,6 +229,12 @@ int main() {
                             }
                             //Resets Variables out of scope and switches turns
                             hasTurn = !hasTurn;
+                            //Resets Pieces Under Attack
+                            for(int y_ind = 0; y_ind < 8; y_ind++){
+                                for(int x_ind = 0; x_ind <8; x_ind++){
+                                    gameboard.getPieceatPos(x_ind,y_ind)->setIsUnderAttack(0);
+                                }
+                            }
                             xPosOrig = 0;   // There is no point to do this btw. It will be overwritten on the next use anyways
                             yPosOrig = 0;
                         }
@@ -203,15 +255,22 @@ int main() {
                 //if it is white side turns
                 if (hasTurn) {
 
+                    //if the King is in check, and the user attempts to select a piece that's not the king
+                    if(whiteSideKing->getisUnderAttack() && selectPiece->getName() != 'k'){
+                        isSelected = false;
+                    }
                     //if the selected piece is not an empty square, and it is a white piece
-                    if (selectPiece->getName() != 'e' && selectPiece->getSide() == WHITE) {
+                    else if (selectPiece->getName() != 'e' && selectPiece->getSide() == WHITE) {
                         isSelected = true;
                     }
                 }
                 //If it is black sides turn
                 else {
+                    if(blackSideKing->getisUnderAttack() && selectPiece->getName() != 'k') {
+                        isSelected = false;
+                    }
                     //if the selected piece is not an empty square, and it is a black piece
-                    if (selectPiece->getName() != 'e' && selectPiece->getSide() == BLACK) {
+                    else if (selectPiece->getName() != 'e' && selectPiece->getSide() == BLACK) {
                         isSelected = true;
                     }
                 }

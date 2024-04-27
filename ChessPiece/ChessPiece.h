@@ -24,6 +24,7 @@ protected:
     int side = NO_PIECE;
     char name = 'e';
     bool hasTakenMove = false;
+    bool isUnderAttack = false;
 public:
     ChessPiece() {};
     ChessPiece( int side ) { this->side = side; };
@@ -36,6 +37,9 @@ public:
 
     bool getHasTakenMove() {return hasTakenMove; };
     void setHasTakenMove() {this->hasTakenMove = true; };
+
+    bool getisUnderAttack() {return isUnderAttack; };
+    void setIsUnderAttack(int val) {this->isUnderAttack = val;};
 
     virtual std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY) { return std::vector<Point>{}; };   // You will have ot pass in the gameboard
 };
