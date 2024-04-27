@@ -8,6 +8,8 @@
 #include "../ChessPiece.h"
 
 class King : public ChessPiece {
+protected:
+    bool hasTakenMove = false;
 public:
     King(); // Default contructor - Precalculates all of the possible moves
     King(int side) : ChessPiece( side ) { setName('k'); };

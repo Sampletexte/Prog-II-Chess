@@ -30,12 +30,12 @@ std::vector<Point> Pawn::getPossibleMoves(std::vector<std::vector<ChessPiece *>>
         if (piece->getSide() == NO_PIECE && hasTakenMove == false) {
             Point pnt{posX, posY - side - side};
             posMovs.push_back(pnt);
-            Pawn::sethasTakenMove();
+           // Pawn::sethasTakenMove();
         }
         if (piece->getSide() == NO_PIECE) {
             Point pnt{posX, posY - side};
             posMovs.push_back(pnt);
-            Pawn::sethasTakenMove();
+            // Pawn::sethasTakenMove();
         }
         return posMovs;
     }

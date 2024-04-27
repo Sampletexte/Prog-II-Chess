@@ -23,6 +23,7 @@ class ChessPiece {
 protected:
     int side = NO_PIECE;
     char name = 'e';
+    bool hasTakenMove = false;
 public:
     ChessPiece() {};
     ChessPiece( int side ) { this->side = side; };
@@ -32,6 +33,9 @@ public:
 
     void setSide( int side ) { this->side = side; };
     int getSide() { return side; };
+
+    bool getHasTakenMove() {return hasTakenMove; };
+    void setHasTakenMove() {this->hasTakenMove = true; };
 
     virtual std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY) { return std::vector<Point>{}; };   // You will have ot pass in the gameboard
 };

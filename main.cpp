@@ -100,7 +100,6 @@ int main() {
                 //std::cout << "log2";
                 int xPosNew = floor(sf::Mouse::getPosition(window).x / 100);
                 int yPosNew = floor(sf::Mouse::getPosition(window).y / 100);
-
                 // get the point of the user click
                 Point moveSelect{xPosNew, yPosNew};
                 //Get square that user selected
@@ -108,26 +107,88 @@ int main() {
                 //Look at valid moveset for that piece
                 std::vector<Point> validSelect = selectPiece->getPossibleMoves(gameboard.getGameboard(), xPosOrig, yPosOrig);
 
-                // Compares valid moveset to desired move, commiting the move if it is valid
-                for (int i = 0; i < validSelect.size(); i++) {
-                    if (moveSelect.x == validSelect[i].x && moveSelect.y == validSelect[i].y) {
-                        gameboard.setPieceatPos(selectPiece, xPosNew, yPosNew);
-                        gameboard.setPieceatPos(new ChessPiece(0), xPosOrig, yPosOrig);
-                    // If white piece is pawn and reaches opposite side, promote to queen
-                    if (selectPiece->getSide() == WHITE && selectPiece->getName() == 'p' && yPosNew == 0){
-                        gameboard.setPieceatPos(new Queen(1), xPosNew, yPosNew);
-                    }
-                    // if black piece is a pawn and reaches the opposite side, promote to queen
-                    else if(selectPiece->getSide() == BLACK && selectPiece->getName() == 'p' && yPosNew ==7){
-                        gameboard.setPieceatPos(new Queen(-1), xPosNew, yPosNew);
-                    }
-                        //Resets Variables out of scope and switches turns
-                        hasTurn = !hasTurn;
-                        xPosOrig = 0;   // There is no point to do this btw. It will be overwritten on the next use anyways
-                        yPosOrig = 0;
-                    }
+
+                //Check for the 4 castling scenarios.
+
+                //Scenario 1: WHITE SIDE -- KING SIDE
+                if(selectPiece->getName() == 'k' && selectPiece->getSide()== WHITE && !selectPiece->getHasTakenMove() && gameboard.getPieceatPos(7, 7)->getSide() == WHITE && gameboard.getPieceatPos(7, 7)->getName() == 'r' &&
+                   !gameboard.getPieceatPos(7, 7)->getHasTakenMove() && gameboard.getPieceatPos(6, 7)->getName() == 'e' && gameboard.getPieceatPos(5, 7)->getName() == 'e' && moveSelect.y == 7 && moveSelect.x == 6){
+                    //Then Castle King Side for White
+                    gameboard.setPieceatPos(selectPiece,xPosNew, yPosNew);
+                    gameboard.setPieceatPos(new Rook(1), 5, 7);
+                    gameboard.setPieceatPos(new ChessPiece(0), xPosOrig, yPosOrig);
+                    gameboard.setPieceatPos(new ChessPiece(0), 7, 7);
+                    //Reset Variables
+                    hasTurn = !hasTurn;
+                    isSelected = false; // Deselect the piece
+
                 }
-                isSelected = false; // Deselect the piece
+                //Scenario 2: WHITE SIDE -- QUEEN SIDE
+                if(selectPiece->getName() == 'k' && selectPiece->getSide()== WHITE && !selectPiece->getHasTakenMove() && gameboard.getPieceatPos(0, 7)->getSide() == WHITE && gameboard.getPieceatPos(0, 7)->getName() == 'r' &&
+                   !gameboard.getPieceatPos(0, 7)->getHasTakenMove() && gameboard.getPieceatPos(3, 7)->getName() == 'e' && gameboard.getPieceatPos(2, 7)->getName() == 'e' && gameboard.getPieceatPos(1, 7)->getName() == 'e' && moveSelect.y == 7 && moveSelect.x == 2){
+                    //Then Castle Queen Side for White
+                    gameboard.setPieceatPos(selectPiece,xPosNew, yPosNew);
+                    gameboard.setPieceatPos(new Rook(1), 3, 7);
+                    gameboard.setPieceatPos(new ChessPiece(0), xPosOrig, yPosOrig);
+                    gameboard.setPieceatPos(new ChessPiece(0), 0, 7);
+                    //Reset Variables
+                    hasTurn = !hasTurn;
+                    isSelected = false; // Deselect the piece
+
+                }
+                //Scenario 3: BLACK SIDE -- KING SIDE
+                else if(selectPiece->getName() == 'k' && selectPiece->getSide()== BLACK && !selectPiece->getHasTakenMove() && gameboard.getPieceatPos(7, 0)->getSide() == BLACK && gameboard.getPieceatPos(7, 0)->getName() == 'r' &&
+                   !gameboard.getPieceatPos(7, 0)->getHasTakenMove() && gameboard.getPieceatPos(6, 0)->getName() == 'e' && gameboard.getPieceatPos(5, 0)->getName() == 'e' && moveSelect.y == 0 && moveSelect.x == 6) {
+                    //Then Castle King Side for Black
+                    gameboard.setPieceatPos(selectPiece, xPosNew, yPosNew);
+                    gameboard.setPieceatPos(new Rook(-1), 5, 0);
+                    gameboard.setPieceatPos(new ChessPiece(0), xPosOrig, yPosOrig);
+                    gameboard.setPieceatPos(new ChessPiece(0), 7, 0);
+                    //Reset Variables
+                    hasTurn = !hasTurn;
+                    isSelected = false; // Deselect the Piece
+                }
+                //Scenario 4: BLACK SIDE -- QUEEN SIDE
+                else if(selectPiece->getName() == 'k' && selectPiece->getSide()== BLACK && !selectPiece->getHasTakenMove() && gameboard.getPieceatPos(0, 0)->getSide() == BLACK && gameboard.getPieceatPos(0, 0)->getName() == 'r' &&
+                    !gameboard.getPieceatPos(0, 0)->getHasTakenMove() && gameboard.getPieceatPos(1, 0)->getName() == 'e' && gameboard.getPieceatPos(2, 0)->getName() == 'e' && gameboard.getPieceatPos(3, 0)->getName() == 'e' && moveSelect.y == 0 && moveSelect.x == 2) {
+                    //Then Castle Queen Side for Black
+                    gameboard.setPieceatPos(selectPiece, xPosNew, yPosNew);
+                    gameboard.setPieceatPos(new Rook(-1), 3, 0);
+                    gameboard.setPieceatPos(new ChessPiece(0), xPosOrig, yPosOrig);
+                    gameboard.setPieceatPos(new ChessPiece(0), 0, 0);
+                    //Reset Variables
+                    hasTurn = !hasTurn;
+                    isSelected = false; // Deselect the Piece
+                }
+
+
+                // If not one of the 4 Castle Scenarios
+                // Compares valid moveset to desired move, commiting the move if it is valid
+                else {
+                    for (int i = 0; i < validSelect.size(); i++) {
+
+                        if (moveSelect.x == validSelect[i].x && moveSelect.y == validSelect[i].y) {
+                            gameboard.setPieceatPos(selectPiece, xPosNew, yPosNew);
+                            gameboard.setPieceatPos(new ChessPiece(0), xPosOrig, yPosOrig);
+                            if(selectPiece->getHasTakenMove() == false){
+                                selectPiece->setHasTakenMove();
+                            }
+                            // If white piece is pawn and reaches opposite side, promote to queen
+                            if (selectPiece->getSide() == WHITE && selectPiece->getName() == 'p' && yPosNew == 0) {
+                                gameboard.setPieceatPos(new Queen(1), xPosNew, yPosNew);
+                            }
+                                // if black piece is a pawn and reaches the opposite side, promote to queen
+                            else if (selectPiece->getSide() == BLACK && selectPiece->getName() == 'p' && yPosNew == 7) {
+                                gameboard.setPieceatPos(new Queen(-1), xPosNew, yPosNew);
+                            }
+                            //Resets Variables out of scope and switches turns
+                            hasTurn = !hasTurn;
+                            xPosOrig = 0;   // There is no point to do this btw. It will be overwritten on the next use anyways
+                            yPosOrig = 0;
+                        }
+                    }
+                    isSelected = false; // Deselect the piece
+                }
             }
             //If the user selects a square before selecting the piece
             else if (event.type == sf::Event::MouseButtonPressed && isSelected == false) {
