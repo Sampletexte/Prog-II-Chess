@@ -18,7 +18,7 @@ public:
     King(); // Default contructor
     King(int side) : ChessPiece( side ) { setName('k'); };
 
-
+    std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard);    // Uses the internal pos
     std::vector<Point> getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY);
     std::vector<Point> getAllMoves(std::vector<std::vector<ChessPiece *>> *gameboard);
 

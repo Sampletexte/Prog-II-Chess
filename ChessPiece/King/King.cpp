@@ -118,7 +118,17 @@ std::vector<Point> King::getAllMoves(std::vector<std::vector<ChessPiece *>> *gam
 }
 
 /**
- *
+ * This function does the same as the other getPossibleMoves, but replaces the posX and posY variables
+ * with the internal pos.x and pos.y
+ * @param gameboard - The current chess board
+ * @return - A list of cells that the piece can move to.
+ */
+std::vector<Point> King::getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard) {
+    return King::getPossibleMoves( gameboard, pos.x, pos.y);
+}
+
+/**
+ * Returns all possible moves that the king can make given the board, and it's position
  * @param gameboard - The current chess board
  * @param posX - The position of the king
  * @param posY - The position of the king

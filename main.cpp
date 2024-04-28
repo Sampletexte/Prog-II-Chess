@@ -236,21 +236,28 @@ int main() {
                             else if (selectPiece->getSide() == BLACK && selectPiece->getName() == 'p' && yPosNew == 7) {
                                 gameboard.setPieceatPos(new Queen(-1), xPosNew, yPosNew);
                             }
-                            if( hasTurn == false && inCheck[hasTurn]) {
-                                std::cout << "Black check" << std::endl;
-                            }
-                            // Check if the move make the current side in check
+
+                            // Check if the move makes the current side in check
                             updateCheck(gameboard, inCheck, dynamic_cast<King *> (blackSideKing), dynamic_cast<King *> (whiteSideKing));
 
-                            std::cout <<"Turn: " << hasTurn << " | In check: " << inCheck[hasTurn] << " | Enemy inCheck: " << inCheck[!hasTurn] <<std::endl;
                             // If the current side's king is in check, revert the change
-                            if( hasTurn == false && inCheck[hasTurn]) {
-                                std::cout << "Black check" << std::endl;
-                            }
                             if(inCheck[hasTurn]) {
                                 gameboard.setPieceatPos(removedPiece, xPosNew, yPosNew);
                                 gameboard.setPieceatPos(selectPiece, xPosOrig, yPosOrig);
                             } else {    // The change isn't reverted
+                                if( inCheck[!hasTurn] ) {   // If this move turn the opponent to check then check to see if it is checkmate
+                                    int kingMovSize = 0;    // The size of the king possible moves array.
+                                    if(!hasTurn) { // The opponent is white
+                                        kingMovSize = dynamic_cast<King *> (whiteSideKing)->getPossibleMoves(gameboard.getGameboard()).size();
+                                    } else {    // The opponent is black
+                                        kingMovSize = dynamic_cast<King *> (blackSideKing)->getPossibleMoves(gameboard.getGameboard()).size();
+                                    }
+                                    if( kingMovSize == 0 ) {
+                                        std::cout << "Checkmate! Winner: " << hasTurn << std::endl;
+                                    }
+                                }
+
+
                                 delete removedPiece;    // No need to hold onto the deleted piece
 
                                 //Resets Variables out of scope and switches turns
