@@ -37,7 +37,7 @@ public:
     Board();
 
     ChessPiece* getPieceatPos( int x, int y ) { return gameboard[y][x]; };
-    void setPieceatPos( ChessPiece* piece, int x, int y) { gameboard[y][x] = piece; };
+    void setPieceatPos( ChessPiece* piece, int x, int y);
 
     std::vector<std::vector<ChessPiece *>> * getGameboard() { return &gameboard; };
 };

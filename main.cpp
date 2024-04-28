@@ -7,6 +7,7 @@
 
 
 void drawboard();
+void updateCheck( Board &gameboard, std::map<bool, bool> &inCheckMap, King *blackKing, King *whiteKing);
 
 int main() {
 
@@ -75,6 +76,11 @@ int main() {
     bool hasTurn = true; // White = T, Black = F
     ChessPiece *whiteSideKing;
     ChessPiece *blackSideKing;
+    std::map<bool, bool> inCheck {       // Make that contains the white and black side and if their respective kings are in check
+            {false, false},       // By default nobody is in check
+            {true, false}           // The keys are based off of the hasTurn variable
+    };
+
     //Main game Logic, constant polling for events
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
@@ -211,9 +217,12 @@ int main() {
                 // If not one of the 4 Castle Scenarios
                 // Compares valid moveset to desired move, commiting the move if it is valid
                 else {
+                    ChessPiece *removedPiece;   // Hold the old chesspiece until we are sure that the move does not bring the king into check
                     for (int i = 0; i < validSelect.size(); i++) {
-
+                        // If a valid move
                         if (moveSelect.x == validSelect[i].x && moveSelect.y == validSelect[i].y) {
+                            removedPiece = gameboard.getPieceatPos(xPosNew, yPosNew);   // Copy the removed piece, so it doesn't get deleted when a piece is set at it's position
+
                             gameboard.setPieceatPos(selectPiece, xPosNew, yPosNew);
                             gameboard.setPieceatPos(new ChessPiece(0), xPosOrig, yPosOrig);
                             if(selectPiece->getHasTakenMove() == false){
@@ -227,12 +236,30 @@ int main() {
                             else if (selectPiece->getSide() == BLACK && selectPiece->getName() == 'p' && yPosNew == 7) {
                                 gameboard.setPieceatPos(new Queen(-1), xPosNew, yPosNew);
                             }
-                            //Resets Variables out of scope and switches turns
-                            hasTurn = !hasTurn;
-                            //Resets Pieces Under Attack
-                            for(int y_ind = 0; y_ind < 8; y_ind++){
-                                for(int x_ind = 0; x_ind <8; x_ind++){
-                                    gameboard.getPieceatPos(x_ind,y_ind)->setIsUnderAttack(0);
+                            if( hasTurn == false && inCheck[hasTurn]) {
+                                std::cout << "Black check" << std::endl;
+                            }
+                            // Check if the move make the current side in check
+                            updateCheck(gameboard, inCheck, dynamic_cast<King *> (blackSideKing), dynamic_cast<King *> (whiteSideKing));
+
+                            std::cout <<"Turn: " << hasTurn << " | In check: " << inCheck[hasTurn] << " | Enemy inCheck: " << inCheck[!hasTurn] <<std::endl;
+                            // If the current side's king is in check, revert the change
+                            if( hasTurn == false && inCheck[hasTurn]) {
+                                std::cout << "Black check" << std::endl;
+                            }
+                            if(inCheck[hasTurn]) {
+                                gameboard.setPieceatPos(removedPiece, xPosNew, yPosNew);
+                                gameboard.setPieceatPos(selectPiece, xPosOrig, yPosOrig);
+                            } else {    // The change isn't reverted
+                                delete removedPiece;    // No need to hold onto the deleted piece
+
+                                //Resets Variables out of scope and switches turns
+                                hasTurn = !hasTurn;
+                                //Resets Pieces Under Attack
+                                for (int y_ind = 0; y_ind < 8; y_ind++) {
+                                    for (int x_ind = 0; x_ind < 8; x_ind++) {
+                                        gameboard.getPieceatPos(x_ind, y_ind)->setIsUnderAttack(0);
+                                    }
                                 }
                             }
                             xPosOrig = 0;   // There is no point to do this btw. It will be overwritten on the next use anyways
@@ -256,21 +283,21 @@ int main() {
                 if (hasTurn) {
 
                     //if the King is in check, and the user attempts to select a piece that's not the king
-                    if(whiteSideKing->getisUnderAttack() && selectPiece->getName() != 'k'){
-                        isSelected = false;
-                    }
+//                    if(whiteSideKing->getisUnderAttack() && selectPiece->getName() != 'k'){
+//                        isSelected = false;
+//                    }
                     //if the selected piece is not an empty square, and it is a white piece
-                    else if (selectPiece->getName() != 'e' && selectPiece->getSide() == WHITE) {
+                    if (selectPiece->getName() != 'e' && selectPiece->getSide() == WHITE) {
                         isSelected = true;
                     }
                 }
                 //If it is black sides turn
                 else {
-                    if(blackSideKing->getisUnderAttack() && selectPiece->getName() != 'k') {
-                        isSelected = false;
-                    }
+//                    if(blackSideKing->getisUnderAttack() && selectPiece->getName() != 'k') {
+//                        isSelected = false;
+//                    }
                     //if the selected piece is not an empty square, and it is a black piece
-                    else if (selectPiece->getName() != 'e' && selectPiece->getSide() == BLACK) {
+                    if (selectPiece->getName() != 'e' && selectPiece->getSide() == BLACK) {
                         isSelected = true;
                     }
                 }
@@ -363,3 +390,15 @@ int main() {
 
     return 0;
     };
+
+/**
+ * Calls the black and white king check routines and stores in in the inCheck flag dictonary. Black is false. White is true.
+ * @param gameboard - The current chessboard
+ * @param inCheckMap - The dictionary that contains the flags if both sides are in check
+ * @param blackKing - The black king
+ * @param whiteKing - The white king
+ */
+void updateCheck( Board &gameboard, std::map<bool, bool> &inCheckMap, King *blackKing, King *whiteKing) {
+    inCheckMap[false] = blackKing->isInCheck(gameboard.getGameboard());
+    inCheckMap[true] = whiteKing->isInCheck(gameboard.getGameboard());
+}
