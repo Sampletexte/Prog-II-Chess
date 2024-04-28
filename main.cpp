@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -63,7 +64,10 @@ int main() {
     blackQueen.setTexture(bq);
     sf::Sprite blackKnight;
     blackKnight.setTexture(bn);
-
+    sf::CircleShape dot;
+    sf::Color grayDot(75, 75, 75,128);
+    dot.setRadius(10.f);
+    dot.setFillColor(grayDot);
     //Create SFML Window
     sf::RenderWindow window(sf::VideoMode(800, 800), "Chess 2: The Sequel", sf::Style::Default);
     sf::Event event;
@@ -89,7 +93,7 @@ int main() {
             }
 
             //Function to locate White King and Black King
-             for(int y_ind = 0; y_ind < 8; y_ind++) {
+            for(int y_ind = 0; y_ind < 8; y_ind++) {
                 for (int x_ind = 0; x_ind < 8; x_ind++) {
                     ChessPiece *tempPiece = gameboard.getPieceatPos(x_ind,y_ind);
                     if(tempPiece->getName() == 'k' && tempPiece->getSide() == WHITE){
@@ -99,7 +103,7 @@ int main() {
                         blackSideKing = tempPiece;
                     }
                 }
-             }
+            }
 
             for(int y_ind = 0; y_ind < 8; y_ind++) {
                 for (int x_ind = 0; x_ind < 8; x_ind++) {
@@ -176,9 +180,9 @@ int main() {
                     }
 
                 }
-                //Scenario 3: BLACK SIDE -- KING SIDE
+                    //Scenario 3: BLACK SIDE -- KING SIDE
                 else if(selectPiece->getName() == 'k' && selectPiece->getSide()== BLACK && !selectPiece->getHasTakenMove() && gameboard.getPieceatPos(7, 0)->getSide() == BLACK && gameboard.getPieceatPos(7, 0)->getName() == 'r' &&
-                   !gameboard.getPieceatPos(7, 0)->getHasTakenMove() && gameboard.getPieceatPos(6, 0)->getName() == 'e' && gameboard.getPieceatPos(5, 0)->getName() == 'e' && moveSelect.y == 0 && moveSelect.x == 6) {
+                        !gameboard.getPieceatPos(7, 0)->getHasTakenMove() && gameboard.getPieceatPos(6, 0)->getName() == 'e' && gameboard.getPieceatPos(5, 0)->getName() == 'e' && moveSelect.y == 0 && moveSelect.x == 6) {
                     //Then Castle King Side for Black
                     gameboard.setPieceatPos(selectPiece, xPosNew, yPosNew);
                     gameboard.setPieceatPos(new Rook(-1), 5, 0);
@@ -194,9 +198,9 @@ int main() {
                         }
                     }
                 }
-                //Scenario 4: BLACK SIDE -- QUEEN SIDE
+                    //Scenario 4: BLACK SIDE -- QUEEN SIDE
                 else if(selectPiece->getName() == 'k' && selectPiece->getSide()== BLACK && !selectPiece->getHasTakenMove() && gameboard.getPieceatPos(0, 0)->getSide() == BLACK && gameboard.getPieceatPos(0, 0)->getName() == 'r' &&
-                    !gameboard.getPieceatPos(0, 0)->getHasTakenMove() && gameboard.getPieceatPos(1, 0)->getName() == 'e' && gameboard.getPieceatPos(2, 0)->getName() == 'e' && gameboard.getPieceatPos(3, 0)->getName() == 'e' && moveSelect.y == 0 && moveSelect.x == 2) {
+                        !gameboard.getPieceatPos(0, 0)->getHasTakenMove() && gameboard.getPieceatPos(1, 0)->getName() == 'e' && gameboard.getPieceatPos(2, 0)->getName() == 'e' && gameboard.getPieceatPos(3, 0)->getName() == 'e' && moveSelect.y == 0 && moveSelect.x == 2) {
                     //Then Castle Queen Side for Black
                     gameboard.setPieceatPos(selectPiece, xPosNew, yPosNew);
                     gameboard.setPieceatPos(new Rook(-1), 3, 0);
@@ -214,8 +218,8 @@ int main() {
                 }
 
 
-                // If not one of the 4 Castle Scenarios
-                // Compares valid moveset to desired move, commiting the move if it is valid
+                    // If not one of the 4 Castle Scenarios
+                    // Compares valid moveset to desired move, commiting the move if it is valid
                 else {
                     ChessPiece *removedPiece;   // Hold the old chesspiece until we are sure that the move does not bring the king into check
                     for (int i = 0; i < validSelect.size(); i++) {
@@ -269,14 +273,28 @@ int main() {
                                     }
                                 }
                             }
-                            xPosOrig = 0;   // There is no point to do this btw. It will be overwritten on the next use anyways
+                            xPosOrig = 0;   // There wasnt a point before but now there is
                             yPosOrig = 0;
                         }
                     }
-                    isSelected = false; // Deselect the piece
+                    if(hasTurn && confirmSelect->getSide() == WHITE){
+                        selectPiece = confirmSelect;
+                        xPosOrig = floor(sf::Mouse::getPosition(window).x / 100);
+                        yPosOrig = floor(sf::Mouse::getPosition(window).y / 100);
+                    }
+                    else if(!hasTurn && confirmSelect->getSide() == BLACK){
+                        selectPiece = confirmSelect;
+                        xPosOrig = floor(sf::Mouse::getPosition(window).x / 100);
+                        yPosOrig = floor(sf::Mouse::getPosition(window).y / 100);
+                    }
+                    else {
+                        isSelected = false;
+                        xPosOrig = 0;   // There wasnt a point before but now there is
+                        yPosOrig = 0;
+                    }// Deselect the piece
                 }
             }
-            //If the user selects a square before selecting the piece
+                //If the user selects a square before selecting the piece
             else if (event.type == sf::Event::MouseButtonPressed && isSelected == false) {
                 //std::cout << "log1";
                 // Get the X and Y position of where the button was pressed
@@ -298,7 +316,7 @@ int main() {
                         isSelected = true;
                     }
                 }
-                //If it is black sides turn
+                    //If it is black sides turn
                 else {
 //                    if(blackSideKing->getisUnderAttack() && selectPiece->getName() != 'k') {
 //                        isSelected = false;
@@ -311,92 +329,111 @@ int main() {
             };
 
 
-                window.clear();
-                //draw background
-                window.draw(chessBoard);
+            window.clear();
+            //draw background
+            window.draw(chessBoard);
 
-                //SWITCH CASE TO DISPLAY EVERY PIECE ON BOARD
-                for (int y_ind = 0; y_ind < 8; y_ind++) {
-                    for (int x_ind = 0; x_ind < 8; x_ind++) {
-                        ChessPiece *tempPiece = gameboard.getPieceatPos(x_ind, y_ind);
-                        if (tempPiece->getSide() == WHITE) {
-                            switch (tempPiece->getName()) {
-                                case 'p':
-                                    whitePawn.setPosition(x_ind * 100, y_ind * 100);
-                                    whitePawn.setScale(.125, .125);
-                                    window.draw(whitePawn);
-                                    break;
-                                case 'r':
-                                    whiteRook.setPosition(x_ind * 100, y_ind * 100);
-                                    whiteRook.setScale(.125, .125);
-                                    window.draw(whiteRook);
-                                    break;
-                                case 'b':
-                                    whiteBishop.setPosition(x_ind * 100, y_ind * 100);
-                                    whiteBishop.setScale(.125, .125);
-                                    window.draw(whiteBishop);
-                                    break;
-                                case 'n':
-                                    whiteKnight.setPosition(x_ind * 100, y_ind * 100);
-                                    whiteKnight.setScale(.125, .125);
-                                    window.draw(whiteKnight);
-                                    break;
-                                case 'q':
-                                    whiteQueen.setPosition(x_ind * 100, y_ind * 100);
-                                    whiteQueen.setScale(.125, .125);
-                                    window.draw(whiteQueen);
-                                    break;
-                                case 'k':
-                                    whiteKing.setPosition(x_ind * 100, y_ind * 100);
-                                    whiteKing.setScale(.125, .125);
-                                    window.draw(whiteKing);
-                                    break;
-                            };
+            //SWITCH CASE TO DISPLAY EVERY PIECE ON BOARD
+            for (int y_ind = 0; y_ind < 8; y_ind++) {
+                for (int x_ind = 0; x_ind < 8; x_ind++) {
+                    ChessPiece *tempPiece = gameboard.getPieceatPos(x_ind, y_ind);
+                    if (tempPiece->getSide() == WHITE) {
+                        switch (tempPiece->getName()) {
+                            case 'p':
+                                whitePawn.setPosition(x_ind * 100, y_ind * 100);
+                                whitePawn.setScale(.125, .125);
+                                window.draw(whitePawn);
+                                break;
+                            case 'r':
+                                whiteRook.setPosition(x_ind * 100, y_ind * 100);
+                                whiteRook.setScale(.125, .125);
+                                window.draw(whiteRook);
+                                break;
+                            case 'b':
+                                whiteBishop.setPosition(x_ind * 100, y_ind * 100);
+                                whiteBishop.setScale(.125, .125);
+                                window.draw(whiteBishop);
+                                break;
+                            case 'n':
+                                whiteKnight.setPosition(x_ind * 100, y_ind * 100);
+                                whiteKnight.setScale(.125, .125);
+                                window.draw(whiteKnight);
+                                break;
+                            case 'q':
+                                whiteQueen.setPosition(x_ind * 100, y_ind * 100);
+                                whiteQueen.setScale(.125, .125);
+                                window.draw(whiteQueen);
+                                break;
+                            case 'k':
+                                whiteKing.setPosition(x_ind * 100, y_ind * 100);
+                                whiteKing.setScale(.125, .125);
+                                window.draw(whiteKing);
+                                break;
+                        };
 
-                        } else if (tempPiece->getSide() == BLACK) {
-                            switch (tempPiece->getName()) {
-                                case 'p':
-                                    blackPawn.setPosition(x_ind * 100, y_ind * 100);
-                                    blackPawn.setScale(.125, .125);
-                                    window.draw(blackPawn);
-                                    break;
-                                case 'r':
-                                    blackRook.setPosition(x_ind * 100, y_ind * 100);
-                                    blackRook.setScale(.125, .125);
-                                    window.draw(blackRook);
-                                    break;
-                                case 'b':
-                                    blackBishop.setPosition(x_ind * 100, y_ind * 100);
-                                    blackBishop.setScale(.125, .125);
-                                    window.draw(blackBishop);
-                                    break;
-                                case 'n':
-                                    blackKnight.setPosition(x_ind * 100, y_ind * 100);
-                                    blackKnight.setScale(.125, .125);
-                                    window.draw(blackKnight);
-                                    break;
-                                case 'q':
-                                    blackQueen.setPosition(x_ind * 100, y_ind * 100);
-                                    blackQueen.setScale(.125, .125);
-                                    window.draw(blackQueen);
-                                    break;
-                                case 'k':
-                                    blackKing.setPosition(x_ind * 100, y_ind * 100);
-                                    blackKing.setScale(.125, .125);
-                                    window.draw(blackKing);
-                                    break;
-                            };
-                        }
+                    } else if (tempPiece->getSide() == BLACK) {
+                        switch (tempPiece->getName()) {
+                            case 'p':
+                                blackPawn.setPosition(x_ind * 100, y_ind * 100);
+                                blackPawn.setScale(.125, .125);
+                                window.draw(blackPawn);
+                                break;
+                            case 'r':
+                                blackRook.setPosition(x_ind * 100, y_ind * 100);
+                                blackRook.setScale(.125, .125);
+                                window.draw(blackRook);
+                                break;
+                            case 'b':
+                                blackBishop.setPosition(x_ind * 100, y_ind * 100);
+                                blackBishop.setScale(.125, .125);
+                                window.draw(blackBishop);
+                                break;
+                            case 'n':
+                                blackKnight.setPosition(x_ind * 100, y_ind * 100);
+                                blackKnight.setScale(.125, .125);
+                                window.draw(blackKnight);
+                                break;
+                            case 'q':
+                                blackQueen.setPosition(x_ind * 100, y_ind * 100);
+                                blackQueen.setScale(.125, .125);
+                                window.draw(blackQueen);
+                                break;
+                            case 'k':
+                                blackKing.setPosition(x_ind * 100, y_ind * 100);
+                                blackKing.setScale(.125, .125);
+                                window.draw(blackKing);
+                                break;
+                        };
                     }
                 }
-                window.display();
             }
+            if(hasTurn && gameboard.getPieceatPos(xPosOrig,yPosOrig)->getSide() == WHITE){
+                std::vector<Point> showdot = gameboard.getPieceatPos(xPosOrig,yPosOrig)->getPossibleMoves(gameboard.getGameboard(),xPosOrig,yPosOrig);
+                for(int i = 0; i <showdot.size(); i++) {
+                    dot.setPosition((showdot[i].x * 100) + 39, (showdot[i].y) * 100 + 39);
+                    window.draw(dot);
+                }
 
 
+
+
+          }
+            if(!hasTurn && gameboard.getPieceatPos(xPosOrig,yPosOrig)->getSide() == BLACK) {
+                std::vector<Point> showdot = gameboard.getPieceatPos(xPosOrig, yPosOrig)->getPossibleMoves(
+                        gameboard.getGameboard(), xPosOrig, yPosOrig);
+                for (int i = 0; i < showdot.size(); i++) {
+                    dot.setPosition((showdot[i].x * 100) + 39, (showdot[i].y) * 100 + 39);
+                    window.draw(dot);
+                }
+            }
+            window.display();
         }
 
+
+    }
+
     return 0;
-    };
+};
 
 /**
  * Calls the black and white king check routines and stores in in the inCheck flag dictonary. Black is false. White is true.
