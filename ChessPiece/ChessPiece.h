@@ -1,6 +1,7 @@
-//
-// Created by sochin1519 on 3/25/2024.
-//
+/*
+ * Created by sochin1519 on 3/25/2024.
+ * Desc: The purpose of this file is to be the default class setup for any chess piece ever added.
+*/
 
 #ifndef PROG_II_CHESS_CHESSPIECE_H
 #define PROG_II_CHESS_CHESSPIECE_H

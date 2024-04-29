@@ -1,7 +1,7 @@
-//
-// Created by sochin1519 on 3/25/2024.
-//
-
+/*
+ * Created by sochin1519 on 3/25/2024.
+ * Desc: The purpose of this file is to be the function definition file for the implementation file of King.
+*/
 #ifndef PROG_II_CHESS_KING_H
 #define PROG_II_CHESS_KING_H
 

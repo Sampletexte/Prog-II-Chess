@@ -1,6 +1,8 @@
-//
-// Created by sochin1519 on 3/25/2024.
-//
+/*
+ * Created by sochin1519 on 3/25/2024.
+ * Desc: This file is a skeleton of the main implentation file that call the rook and bishop class files to use their movesets
+ * for the Queen.
+*/
 
 #ifndef PROG_II_CHESS_QUEEN_H
 #define PROG_II_CHESS_QUEEN_H

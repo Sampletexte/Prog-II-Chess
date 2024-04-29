@@ -1,6 +1,7 @@
-//
-// Created by sochin1519 on 3/25/2024.
-//
+/*
+ * Created by sochin1519 on 3/25/2024.
+ * Desc: The purpose of this file is to generate the possible moveset of the Queen chess piece.
+*/
 
 #include "Queen.h"
 

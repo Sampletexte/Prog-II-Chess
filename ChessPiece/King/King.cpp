@@ -1,6 +1,8 @@
-//
-// Created by sochin1519 on 3/25/2024.
-//
+/*
+ * Created by sochin1519 on 3/25/2024.
+ * Desc: This file calculates the possibilities of every move the king piece can take giving the current chessboard.
+ * It also determines whether itself is in check.
+*/
 
 #include "King.h"
 
