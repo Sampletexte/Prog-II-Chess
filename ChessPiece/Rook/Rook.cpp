@@ -1,6 +1,7 @@
-//
-// Created by sochin1519 on 3/25/2024.
-//
+/*
+ * Created by sochin1519 on 3/25/2024.
+ * This file provides the code for the generation of the moves that the rook can make given its current situation.
+*/
 
 #include "Rook.h"
 
@@ -8,6 +9,13 @@ Rook::Rook():ChessPiece() {
     name = 'r';
 }
 
+/**
+ * This file calculates all of the moves that a the chess piece can do at a specific location.
+ * @param gameboard - The current chess board
+ * @param posX - The piece position
+ * @param posY - The piece position
+ * @return - An array of points that refer to the move possible by that chess piece
+ */
 std::vector<Point> Rook::getPossibleMoves(std::vector<std::vector<ChessPiece *>> *gameboard, int posX, int posY) {
     std::vector<Point> posMovs; // Array of all possible moves
 

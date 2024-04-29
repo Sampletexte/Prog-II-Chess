@@ -1,6 +1,7 @@
-//
-// Created by sochin1519 on 3/25/2024.
-//
+/*
+ * Created by sochin1519 on 3/25/2024.
+ * Desc: This file provides the skeleton of the rook chess piece claas.
+*/
 
 #ifndef PROG_II_CHESS_ROOK_H
 #define PROG_II_CHESS_ROOK_H

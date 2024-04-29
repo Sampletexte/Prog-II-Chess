@@ -1,6 +1,7 @@
-//
-// Created by sochin1519 on 3/25/2024.
-//
+/*
+ * Created by sochin1519 on 3/25/2024.
+ * Desc: The purpose of this file is to provide the definition for the generation of chess piece moves for the pawn.
+*/
 
 #include "Pawn.h"
 
@@ -8,7 +9,13 @@ Pawn::Pawn() : ChessPiece() {
 
 };
 
-
+/**
+ * This file calculates all of the moves that a the chess piece can do at a specific location.
+ * @param gameboard - The current chess board
+ * @param posX - The piece position
+ * @param posY - The piece position
+ * @return - An array of points that refer to the move possible by that chess piece
+ */
 std::vector<Point> Pawn::getPossibleMoves(std::vector<std::vector<ChessPiece *>> * gameboard, int posX, int posY) {
     std::vector<Point> posMovs;
     int attackX[2] = {-1, 1}; // To the left and right of the pawn

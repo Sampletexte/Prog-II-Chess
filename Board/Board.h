@@ -1,11 +1,11 @@
-//
-// Created by sochin1519 on 3/25/2024.
-//
+/*
+ * Created by sochin1519 on 3/25/2024.
+ * Desc: This file is the header file for the board class that stores the gameboard state.
+*/
 
 #ifndef PROG_II_CHESS_BOARD_H
 #define PROG_II_CHESS_BOARD_H
 
-//class ChessPiece;   // Forward declaration of ChessPiece. For circular dependency with board
 
 
 #include <algorithm>
