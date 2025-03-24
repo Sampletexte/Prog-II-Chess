@@ -14,4 +14,4 @@ currently being supported with security updates.
 
 ## Reporting a Vulnerability
 
-send an email to nicholasjosephhubbard@gmail.com
+send an email to njhubbard6872@eagle.fgcu.edu
